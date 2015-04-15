@@ -251,7 +251,7 @@ def worker_start(ioLoop, init=None, process_count=0):
                     TASK_RESULTS[req_id] = response
             except:
                 traceback.print_exc()
-            logging.error("callback message:%s", message)
+            logging.info("callback message:%s", message)
         ioLoop.add_callback(callback)
     callback()
     signal.signal(signal.SIGTERM, onSignal)
@@ -264,5 +264,5 @@ def worker_start(ioLoop, init=None, process_count=0):
         process = multiprocessing.Process(target=worker, name="P-%s" % i, args=(DISPATCH_QUEUE, CALLBACK_QUEUE))
         process.start()
         PROCESSES.append(process)
-    logging.error("sub processes started!!")
+    logging.info("sub processes started!!")
 
